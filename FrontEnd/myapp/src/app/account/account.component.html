@@ -1,0 +1,80 @@
+<link href='https://fonts.googleapis.com/css?family=Roboto:500,900,100,300,700,400' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+<link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@1,600&family=Space+Mono:wght@700&display=swap" rel="stylesheet">
+<div *ngIf="userdata;"><pre style="color: green;text-align: center;" ><pre style="color: green;">{{ userdata.username }} Thanks, for chossing our website . 
+ Successfully loged In .
+
+<button routerLink='/home' class="btn btn-sm btn-success">Go Back Home</button>
+
+
+</pre></pre></div>
+
+
+      
+<div *ngIf="!userdata">
+
+	
+	<div class="row">
+  		<div class="column">
+    		<div class="card">
+
+		<form [formGroup]="myform" (ngSubmit)="onSubmit()" class="form-signin" style="text-align: center;">
+		
+		<h3><u style="font-family: 'Space Mono', monospace;">Login</u></h3>
+		
+		<div>
+			<label for="username"></label>
+			<input type="text" class="form-control" formControlName="username" placeholder="Username" required autofocus>
+		</div>
+		<div>
+			<label for="password"></label>
+			<input type="password" class="form-control" formControlName="password" placeholder="Password" required>
+		</div>
+		<br>
+		
+		<div *ngIf="lError" style="color: red">{{ lError }}</div>
+		<br>
+		
+		<button type="submit"  class="btn btn-lg btn-primary btn-block">Login</button>
+
+		</form>
+</div>
+</div>
+  <div class="column">
+    <div class="card">
+	<form class="form-signin" style="text-align:center;">
+		<h3><u style="font-family: 'Space Mono', monospace;">Register</u></h3>
+		<br>
+		<input type="text" class="form-control" name="username" id='username' [(ngModel)]="register.username" placeholder="Username" #username="ngModel" minlength="3" maxlength="20">
+
+		<div *ngIf='username.dirty && username.touched  && !username.valid' style="color: red;" >* UserName Field is not required</div>
+		<br>
+		<input type="text" class="form-control" id='email' name="email" [(ngModel)]="register.email" placeholder="Email" #email= 'ngModel' ngModel [email]="true" required minlength="4">
+
+		<div *ngIf='!email.valid && email.dirty'><pre style="color: red">* Email Field is not required</pre></div><br>
+
+		<input type="text" class="form-control" id='phone' name="phone" [(ngModel)]="register.phone" placeholder="Phone Number" #phone= 'ngModel' maxlength="10" ><br>
+		
+		<input type="password" class="form-control" id='password' name="password" [(ngModel)]="register.password" #password='ngModel' placeholder="Password" required minlength="5">
+		{{ register.password }}
+
+		<br>
+
+		
+
+		<div>
+		<input type="password" class="form-control" name="password1" [(ngModel)]="register.password1" placeholder="Confirm Password" required minlength="5">
+		</div>
+		<br>
+		
+		<div *ngIf='(register.password == register.password1) && register.username && register.email && register.phone && register.password'><button (click)="registerUser()" class="btn btn-lg btn-primary btn-block">Register</button></div>
+		<div *ngIf="rError" style="color: red">{{ rError }}</div>
+	</form>
+	</div>
+	</div>
+	</div>
+</div>
